@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/dialog";
 import Celestial from "@/components/Celestial";
 import EmptyState from "@/components/EmptyState";
+import ThemeToggle from "@/components/ThemeToggle";
 import { computeStats, computeStreak } from "@/lib/spiritual";
 
 export default function Profile() {
@@ -119,6 +120,15 @@ export default function Profile() {
         <LinkCard icon={Calendar} title="History" onClick={() => navigate("/history")} />
         <LinkCard icon={Award} title="Collection" onClick={() => navigate("/collection")} />
       </div>
+
+      {/* Appearance */}
+      <section className="flex items-center justify-between rounded-2xl border border-border bg-card p-4">
+        <div>
+          <p className="font-semibold text-foreground">Appearance</p>
+          <p className="text-xs text-muted-foreground">Switch between day and night</p>
+        </div>
+        <ThemeToggle />
+      </section>
 
       {/* Saved reminders */}
       <section>
