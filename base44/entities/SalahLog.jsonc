@@ -1,0 +1,51 @@
+{
+  "name": "SalahLog",
+  "type": "object",
+  "properties": {
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "prayer": {
+      "type": "string",
+      "enum": [
+        "fajr",
+        "dhuhr",
+        "asr",
+        "maghrib",
+        "isha"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "prayed",
+        "missed",
+        "qada"
+      ]
+    },
+    "feeling": {
+      "type": "string"
+    },
+    "note": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "date",
+    "prayer",
+    "status"
+  ],
+  "rls": {
+    "read": {
+      "created_by_id": "{{user.id}}"
+    },
+    "create": true,
+    "update": {
+      "created_by_id": "{{user.id}}"
+    },
+    "delete": {
+      "created_by_id": "{{user.id}}"
+    }
+  }
+}

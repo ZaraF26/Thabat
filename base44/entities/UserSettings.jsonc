@@ -1,0 +1,58 @@
+{
+  "name": "UserSettings",
+  "type": "object",
+  "properties": {
+    "display_name": {
+      "type": "string"
+    },
+    "avatar_url": {
+      "type": "string"
+    },
+    "track_salah": {
+      "type": "boolean",
+      "default": true
+    },
+    "track_dhikr": {
+      "type": "boolean",
+      "default": true
+    },
+    "track_quran": {
+      "type": "boolean",
+      "default": true
+    },
+    "focus": {
+      "type": "string"
+    },
+    "onboarded": {
+      "type": "boolean",
+      "default": false
+    },
+    "last_opened_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "notifications_enabled": {
+      "type": "boolean",
+      "default": true
+    },
+    "favorite_quotes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    }
+  },
+  "rls": {
+    "read": {
+      "created_by_id": "{{user.id}}"
+    },
+    "create": true,
+    "update": {
+      "created_by_id": "{{user.id}}"
+    },
+    "delete": {
+      "created_by_id": "{{user.id}}"
+    }
+  }
+}

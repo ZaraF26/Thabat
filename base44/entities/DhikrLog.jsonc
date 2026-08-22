@@ -1,0 +1,36 @@
+{
+  "name": "DhikrLog",
+  "type": "object",
+  "properties": {
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "dhikr_type": {
+      "type": "string"
+    },
+    "count": {
+      "type": "number"
+    },
+    "note": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "date",
+    "dhikr_type",
+    "count"
+  ],
+  "rls": {
+    "read": {
+      "created_by_id": "{{user.id}}"
+    },
+    "create": true,
+    "update": {
+      "created_by_id": "{{user.id}}"
+    },
+    "delete": {
+      "created_by_id": "{{user.id}}"
+    }
+  }
+}

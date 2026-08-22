@@ -1,0 +1,38 @@
+{
+  "name": "Quote",
+  "type": "object",
+  "properties": {
+    "text": {
+      "type": "string"
+    },
+    "source": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "text",
+    "source",
+    "category"
+  ],
+  "rls": {
+    "read": true,
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}
