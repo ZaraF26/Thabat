@@ -11,6 +11,7 @@ import {
 import Celestial from "@/components/Celestial";
 import EmptyState from "@/components/EmptyState";
 import ThemeToggle from "@/components/ThemeToggle";
+import AvatarUploader from "@/components/AvatarUploader";
 import { computeStats, computeStreak } from "@/lib/spiritual";
 
 export default function Profile() {
@@ -53,6 +54,11 @@ export default function Profile() {
     } finally { setSavingName(false); }
   };
 
+  const handleAvatar = async (file_url) => {
+    await base44.entities.UserSettings.update(settings.id, { avatar_url: file_url });
+    setSettings({ ...settings, avatar_url: file_url });
+  };
+
   const removeFavorite = async (id) => {
     const next = (settings.favorite_quotes || []).filter((x) => x !== id);
     await base44.entities.UserSettings.update(settings.id, { favorite_quotes: next });
@@ -88,9 +94,7 @@ export default function Profile() {
       {/* Identity */}
       <section className="rounded-2xl border border-border bg-card p-4">
         <div className="flex items-center gap-3">
-          <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-accent to-primary text-xl font-semibold text-primary-foreground">
-            {(settings.display_name || "Y").charAt(0).toUpperCase()}
-          </div>
+          <AvatarUploader url={settings.avatar_url} name={settings.display_name} onChange={handleAvatar} />
           <div className="flex-1">
             <p className="font-semibold text-foreground">{settings.display_name || "Your name"}</p>
             <p className="text-xs text-muted-foreground">{settings.focus || "No focus set"}</p>
