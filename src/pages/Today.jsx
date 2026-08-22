@@ -103,10 +103,15 @@ export default function Today() {
       });
       setSalahLogs((prev) => [...prev, updated]);
     }
-    // bead celebration
-    const newTotal = status === "prayed" && !existing
-      ? tasbeeh.total + 1
-      : status === "prayed" ? tasbeeh.total : tasbeeh.total - (existing?.status === "prayed" ? 1 : 0);
+    // bead celebration: compare total prayed before vs after this save
+    let newTotal = tasbeeh.total;
+    if (status === "prayed" && !existing) newTotal = tasbeeh.total + 1;
+    else if (existing) {
+      const wasPrayed = existing.status === "prayed";
+      const nowPrayed = status === "prayed";
+      if (nowPrayed && !wasPrayed) newTotal = tasbeeh.total + 1;
+      else if (!nowPrayed && wasPrayed) newTotal = tasbeeh.total - 1;
+    }
     const newBeads = Math.floor(newTotal / 5);
     if (newBeads > beadsBefore) {
       setCelebration({ bead: true });
@@ -121,6 +126,9 @@ export default function Today() {
       </div>
     );
   }
+
+  // New or not-yet-onboarded users are redirected to onboarding (triggered in the effect above).
+  if (!settings || !settings.onboarded) return null;
 
   return (
     <div className="space-y-6">
